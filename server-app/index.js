@@ -25,6 +25,12 @@ io.on("connection", (socket) => {
   });
 });
 
+http.on('upgrade', function (req, socket, head) {
+  proxy.ws(req, socket, head, { target: "ws://localhost:3000" }, (err) => {
+    console.log(err);
+  });
+});
+
 http.listen(5000, () => {
   console.log("listening on *:5000");
 });
